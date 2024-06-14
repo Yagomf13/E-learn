@@ -1,0 +1,246 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-learn</title>
+    <link rel="stylesheet" href="{% static "styles.css" %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="{% static "Logo(E).svg" %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+
+<div class="w-full">
+
+  <!-- ········································ Header ····································· -->
+    <header class="bg-gray-900 py-6 px-4 md:px-6">
+      <div class="container mx-auto flex items-center justify-between">
+        <a class="text-white font-bold text-2xl" href="">
+          <img src="{% static "Logo.svg" %}" alt="http://127.0.0.1:8000/">
+        </a>
+        <div class="flex items-center gap-4">
+          {% if user.is_authenticated %}
+            <a class="pr-8 text-white hover:text-gray-300 transition-colors text-md" href="{% url 'user' %}">
+                Mi Perfil 
+            </a>
+        {% else %}
+            <a class="pr-8 text-white hover:text-gray-300 transition-colors text-md" href="{% url 'login' %}">
+                Iniciar sesión
+            </a>
+            <a class="inline-flex items-center justify-center rounded-md bg-white px-4 py-2 text-md font-medium text-gray-900 shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2" href="{% url 'register' %}">
+                Unirse
+            </a>
+        {% endif %}
+        </div>
+      </div>
+    </header>
+    <!-- ··················································································· -->
+
+    <main>
+      <body class="bg-gray-100">
+        <section class="bg-gray-100 py-12 px-4 md:px-6">
+          <div class="container mx-auto flex flex-col items-center justify-center">
+              <h1 class="text-3xl font-bold mb-4">Encuentra lo que Necesitas</h1>
+              <div class="flex items-center">
+                <div class="w-full max-w-xl flex-grow mr-2">
+                    <input
+                        id="busqueda"
+                        class="h-12 resize-x border bg-background px-4 py-3 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500"
+                        placeholder="¿Qué quieres aprender hoy?"
+                    />
+                </div>
+                <button id="botonBusqueda" class="h-10 w-12 flex items-center justify-center rounded-full bg-gray-900 text-white">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+            
+            
+          </div>
+        </section>
+
+        <h2 id="resultados" class="text-2xl font-bold text-center mb-8" style="display: none;">Resultados</h2>
+
+<!-- ········································ CAROUSEL ········································ -->
+<div class="flex justify-center" id="carrusel">
+  <div class="carousel w-90vw max-w-screen-xl max-h-96 relative overflow-hidden">
+   
+    <img src="{% static 'Code.PNG' %}">
+
+    <img src="{% static 'Estu.jpg' %}">
+    <img src="{% static 'Fun.PNG' %}">
+
+      <div class="carousel-controls absolute top-1/2 transform -translate-y-1/2 left-0 w-full text-center">
+        <button onclick="prevSlide()" class="inline-block" style="background-color: transparent; border: none; font-size: 24px;">&#10094;</button>
+        <button onclick="nextSlide()" class="inline-block" style="background-color: transparent; border: none; font-size: 24px;">&#10095;</button>
+    </div>
+    
+    
+
+      <div class="carousel-indicators absolute bottom-2 right-0 flex justify-end">
+          <button class="w-4 h-4 bg-gray-400 rounded-full mr-2" style="display: none;" onclick="showSlide(0)"></button>
+          <button class="w-4 h-4 bg-gray-400 rounded-full mr-2" style="display: none;" onclick="showSlide(1)"></button>
+          <button class="w-4 h-4 bg-gray-400 rounded-full" style="display: none;" onclick="showSlide(2)"></button>
+      </div>
+  </div>
+</div>
+<!-- ·························································································· -->
+
+        <!-- ········································ PROYECTOS ······································· -->
+<h2 class="text-2xl font-bold text-center mb-8 pt-16">Cursos Destacados</h2>
+<div class="container mx-auto flex flex-wrap justify-center pt-1 pb-10">
+    <!-- Card 1 -->
+<div class="max-w-xs rounded-xl overflow-hidden shadow-lg m-2" style="width: 275px; height: 400px; position: relative;">
+  <a href="https://www.freecodecamp.org" target="_blank">
+      <img class="w-full h-48 object-cover" src="https://yt3.googleusercontent.com/ytc/AIdro_lGRc-05M2OoE1ejQdxeFhyP7OkJg9h4Y-7CK_5je3QqFI=s900-c-k-c0x00ffffff-no-rj" alt="FreeCodeCamp">
+  </a>
+  <div class="px-4 py-2">
+      <div class="font-bold text-base mb-2">Freecodecamp</div>
+      <p class="text-gray-600 text-sm">
+          FreeCodeCamp es una plataforma educativa gratuita centrada en la programación, como HTML, CSS, JavaScript, Python y más.
+      </p>
+  </div>
+  <div class="px-4 pt-2 pb-1">
+      <span class="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-1 mb-1">#Tecnología</span>
+      <span class="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-1 mb-1">#Software</span>
+      <span class="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-1 mb-1">#Desarrollador</span>
+  </div>
+  <button class="corazon" style="position: absolute; bottom: 10px; right: 10px; font-size: 24px;">
+      🖤
+  </button>
+</div>
+
+<!-- Card 2 -->
+<div class="max-w-xs rounded-xl overflow-hidden shadow-lg m-2" style="width: 275px; height: 400px; position: relative;">
+  <a href="https://www.bonappetit.com" target="_blank">
+      <img class="w-full h-48 object-cover" src="https://logowik.com/content/uploads/images/bon-appetit-magazine1883.logowik.com.webp" alt="Bon Appétit">
+  </a>
+  <div class="px-4 py-2">
+      <div class="font-bold text-base mb-2">Bon Appétit</div>
+      <p class="text-gray-600 text-sm">
+          Bon Appétit ofrece recetas, videos y artículos gastronómicos para entusiastas culinarios en busca de inspiración.
+      </p>
+  </div>
+  <div class="px-4 pt-2 pb-1">
+      <span class="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-1 mb-1">#Cocina</span>
+      <span class="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-1 mb-1">#ChefEnCasa</span>
+      <span class="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-1 mb-1">#Gastronomía</span>
+  </div>
+  <button class="corazon" style="position: absolute; bottom: 10px; right: 10px; font-size: 24px;">
+    🖤
+  </button>
+</div>
+
+<!-- Card 3 -->
+<div class="max-w-xs rounded-xl overflow-hidden shadow-lg m-2" style="width: 275px; height: 400px; position: relative;">
+  <a href="https://es.duolingo.com" target="_blank">
+      <img class="w-full h-48 object-cover" src="https://cdn.businessinsider.es/sites/navi.axelspringer.es/public/media/image/2023/11/aplicacion-duolingo-3213288.jpg?tf=3840x" alt="Duolingo">
+  </a>
+  <div class="px-4 py-2">
+      <div class="font-bold text-base mb-2">Duolingo</div>
+      <p class="text-gray-600 text-sm">
+          Duolingo es una plataforma educativa que ofrece lecciones interactivas y divertidas para aprender idiomas.
+      </p>
+  </div>
+  <div class="px-4 pt-2 pb-1">
+      <span class="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-1 mb-1">#Idiomas</span>
+      <span class="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-1 mb-1">#Duolingo</span>
+  </div>
+  <button class="corazon" style="position: absolute; bottom: 10px; right: 10px; font-size: 24px;">
+    🖤
+  </button>
+</div>
+
+<!-- Card 4 -->
+<div class="max-w-xs rounded-xl overflow-hidden shadow-lg m-2" style="width: 275px; height: 400px; position: relative;">
+  <a href="https://www.adobe.com/products/premiere.html" target="_blank">
+      <img class="w-full h-48 object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPp4FDAc0h1ntWRfAr7fUYH7xI77WKlMxBLw&s" alt="Adobe Premiere Pro">
+  </a>
+  <div class="px-4 py-2">
+      <div class="font-bold text-base mb-2">Adobe Premiere Pro</div>
+      <p class="text-gray-600 text-sm"> 
+          Adobe ofrece tutoriales completos para aprender a utilizar su software de edición de video, Premiere Pro.
+      </p>
+  </div>
+  <div class="px-4 pt-2 pb-1">
+      <span class="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-1 mb-1">#Videos</span>
+      <span class="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-1 mb-1">#Adobe</span> 
+  </div>
+  <button class="corazon" style="position: absolute; bottom: 10px; right: 10px; font-size: 24px;">
+    🖤
+  </button>
+</div>
+
+</div>
+
+
+        <!-- ········································································································· -->
+
+        <!-- ············································ REVIEWS SECTION ············································ -->
+        <section class="bg-gray-100 py-12">
+          <div class="container mx-auto">
+              <h2 class="text-2xl font-bold text-center mb-8">Reviews de Clientes</h2>
+              <div class="flex flex-wrap justify-center">
+                  <!-- Review 1 -->
+                  <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md p-4 m-4">
+                      <p class="mb-2 font-semibold text-sm">Josias Neto</p>
+                      <p class="mb-4 text-gray-600">"Me ha ayudado mucho a aprender a programar. ¡¡Lo recomiendo mucho!!."</p>
+                      <p class="text-yellow-500">★★★★☆</p>
+                  </div>
+                  <!-- Review 2 -->
+                  <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md p-4 m-4">
+                      <p class="mb-2 font-semibold text-sm">Francisco Cajella</p>
+                      <p class="mb-4 text-gray-600">"English very good to learn I enjoy it so much"</p>
+                      <p class="text-yellow-500">★★★★★</p>
+                  </div>
+                  <!-- Review 3 -->
+                  <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md p-4 m-4">
+                      <p class="mb-2 font-semibold text-sm">Alejandro Martínez</p>
+                      <p class="mb-4 text-gray-600">"Le hice una tarta de queso deliciosa a mi madre por su cumpleaños. ¡¡10 de 10!!"</p>
+                      <p class="text-yellow-500">★★★★☆</p>
+                  </div>
+              </div>
+          </div>
+      </section>
+      <!-- ········································································································· -->
+       
+      <!-- ················································ FOOTER ················································· -->
+        <footer class="bg-gray-900 shadow dark:bg-gray-900 w-full mt-auto">
+          <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+              <div class="sm:flex sm:items-center sm:justify-between">
+                  <a href="http://127.0.0.1:8000/" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+                      <img src="{% static "Logo.svg" %}" class="h-8" alt="Flowbite Logo" />
+                      <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"></span>
+                  </a>
+                  <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">  
+                      <li>
+                          <a href="https://github.com/FranciscoCallejaCarbajo" class="hover:underline me-4 md:me-6" target="_blank"><i class="fa-brands fa-github pr-1"></i>Fran</a>
+                      </li>
+                      <li>
+                          <a href="https://github.com/alma8026" class="hover:underline me-4 md:me-6" target="_blank"><i class="fa-brands fa-github pr-1"></i>Alejandro</a>
+                      </li>
+                      <li>
+                          <a href="https://github.com/JosiasGNeto" class="hover:underline me-4 md:me-6" target="_blank"><i class="fa-brands fa-github pr-1"></i>Josias</a>
+                      </li>
+                      <li>
+                          <a href="https://github.com/Yagomf13" class="hover:underline" target="_blank"><i class="fa-brands fa-github pr-1"></i>Yago</a>
+                      </li>
+                  </ul>
+              </div>
+              <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+              <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="http://127.0.0.1:8000/" class="hover:underline">E-learn</a>. All Rights Reserved.</span>
+          </div>
+      </footer>
+      <!-- ········································································································· -->
+
+    </main>
+  </div>
+
+    <!-- ················································ SCRIPTS ·················································· -->
+    <script src="{% static "script.js" %}"></script>
+    <!-- ··········································································································· -->
+
+</body>
+</html>
