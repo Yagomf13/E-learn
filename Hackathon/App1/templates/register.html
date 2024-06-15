@@ -27,19 +27,29 @@
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                         Crear una cuenta
                     </h1>
+                    {% if form_error %}
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded-md my-4">
+                        {{ form_error }}
+                    </div>
+                    {% endif %}
+                    {% if email_error %}
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded-md my-4">
+                        {{ email_error }}
+                    </div>
+                    {% endif %}
                     <form method="post" action="{% url 'crear_usuario' %}" class="space-y-4 md:space-y-6">
                         {% csrf_token %}
                         <div>
                             <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900">Nombre</label>
-                            <input type="text" id="nombre" name="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Nombre" required>
+                            <input type="text" id="nombre" name="nombre" value="{{ nombre }}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Nombre" required>
                         </div>
                         <div>
                             <label for="apellido" class="block mb-2 text-sm font-medium text-gray-900">Apellido</label>
-                            <input type="text" id="apellido" name="apellido" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Apellido" required>
+                            <input type="text" id="apellido" name="apellido" value="{{ apellido }}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Apellido" required>
                         </div>
                         <div>
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Tu correo electrónico</label>
-                            <input type="email" id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="nombre@empresa.com" required>
+                            <input type="email" id="email" name="email" value="{{ email }}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="nombre@empresa.com" required>
                         </div>
                         <div>
                             <label for="contraseña" class="block mb-2 text-sm font-medium text-gray-900">Contraseña</label>
@@ -47,7 +57,7 @@
                         </div>
                         <div>
                             <label for="birthday" class="block mb-2 text-sm font-medium text-gray-900">Fecha de nacimiento</label>
-                            <input type="date" id="birthday" name="birthday" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
+                            <input type="date" id="birthday" name="birthday" value="{{ birthday }}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
                         </div>
     
                         <button class="w-full text-white bg-gray-900 hover:bg-white hover:text-gray-900 border border-gray-900 hover: transition duration-200 ease-in-out font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit" [disabled]="myform.invalid">Crear una cuenta</button>
