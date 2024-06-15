@@ -13,4 +13,4 @@ urlpatterns = [
     # Agrega la URL para la página de logout utilizando auth_views
     path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
 ]
-    
+       

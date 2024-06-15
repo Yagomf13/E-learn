@@ -106,7 +106,7 @@ def crear_usuario(request):
         if not re.search(r'[!@#$%^&*(),.?":{}|<>]', contraseña):
             messages.error(request, 'La contraseña debe contener al menos un caracter especial (!@#$%^&*(),.?":{}|<>).')
             return render(request, 'register.html', {'form_error': 'La contraseña debe contener al menos un caracter especial.', 'nombre': nombre, 'apellido': apellido, 'email': email, 'birthday': birthday})
-
+   
         # Crea un usuario en el modelo de usuario de Django
         user = User.objects.create_user(username=email, email=email, password=contraseña)
         
